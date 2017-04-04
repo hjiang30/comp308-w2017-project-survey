@@ -31,11 +31,14 @@ module.exports.ReadSurveyList = (req,res)=>
 
 // Display create survey ejs page
 module.exports.DisplayAdd = (req,res) => {
+    
+
     res.render('surveys/create', {
     title: "Add a new Survey",
     surveys: '',
     games:'',
-    displayName: req.user.displayName
+    displayName: req.user.displayName,
+    userid :req.user._id
   });
 }
 
@@ -45,39 +48,47 @@ module.exports.CreateSurvey = (req, res) => {
 
     //create question objects
     let numberOfQuestion = req.body.numberOfQuestion;
+    console.log(numberOfQuestion);
+    console.log(req.body['questionAns11']);
+    console.log(req.body['questionAns' + 1 + '2']);
+    console.log(req.body['questionAns' + 1 + '3']);
     //let Question = questionSchema;
     //let Answer = answerSchema;
-    let questionArray = new Array();
-
+    let questionArray = [];
+    
     //create questions accorder to the numberOfQuestion
-    for (var i = 0; i < numberOfQuestion; ++i)
+    for (var i = 1; i <= numberOfQuestion; ++i)
     {
-        let question = new questionSchema({
-            "questionTopic" : req.body.topic[i],
+        
+        let question =  {
+            "questionTopic" : req.body['questionTopic' + i],
             "questionAns" : 
-                [
-                     { "answer" : req.body.questionAns[i][1] },
-                     { "answer" : req.body.questionAns[i][2] },
-                     { "answer" : req.body.questionAns[i][3] },
+                [   
+                     { "answer" : req.body['questionAns' + i + '1'] },
+                     { "answer" : req.body['questionAns' + i + '2'] },
+                     { "answer" : req.body['questionAns' + i + '3'] }
                 ],
              "type" : 1
-        })
-
+        }
+        
         questionArray.push(question);
     }
 
+    console.log(questionArray);
+    //console.log(req.body.userid);
+    console.log(questionArray[0].questionAns);
+
 
     // get a reference to the id from the url
-    let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+    //let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
     let newSurvey = survey({
             "topic": req.body.topic,
-            "user": id,
-            "createDate" : new Data(),
-            "expireDate" : req.body.date,
-            "questions" : questionArray,
-            /*
-            [
-                { "questionTopic" : req.body.topic1,
+            "user": req.user._id,
+            "createDate" : new Date(),
+            "expireDate" : new Date(),//req.body.date,
+            "questions" : questionArray,       
+            /*[
+                { "questionTopic" : req.body.questionTopic1,
                   "questionAns" : 
                   [
                       { "answer" : req.body.questionAns11 },
@@ -87,7 +98,7 @@ module.exports.CreateSurvey = (req, res) => {
                   "type" : 1
                 },
                 {
-                  "questionTopic" : req.body.topic1,
+                  "questionTopic" : req.body.questionTopic2,
                   "questionAns" : 
                   [
                       { "answer" : req.body.questionAns21 },
@@ -96,8 +107,8 @@ module.exports.CreateSurvey = (req, res) => {
                   ],
                   "type" : 1
                 }
-            ]
-            */
+            ]*/
+            
     });
     
 

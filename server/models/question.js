@@ -1,11 +1,11 @@
 let mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
-//let answer = require('../models/answer');
+let answer = new Schema ({ answer : String });
 
-    let questionSchema = new Schema({
+    let questionSchema = mongoose.Schema({
         questionTopic : String,
-        questionAns : [],
+        questionAns : [{ answer : String }],
         type : Number
     });
 
