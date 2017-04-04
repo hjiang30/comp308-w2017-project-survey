@@ -43,16 +43,16 @@
           <% } %>
         <% } %>
 
-        <% if(title == "Contact") { %>
-          <li class="active"><a href="/contact"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+        <% if(title == "Add a new Survey") { %>
+          <li class="active"><a href="/surveys/create"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
         <% } else { %>
-          <li><a href="/contact"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+          <li><a href="/surveys/create"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
         <% } %>
 
         <% if(title == "Respond") { %>
-          <li class="active"><a href="/contact"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
+          <li class="active"><a href="/surveys"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
         <% } else { %>
-          <li><a href="/contact"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
+          <li><a href="/surveys"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
         <% } %>
 
         <% if(typeof displayName == 'string' && displayName) { %>

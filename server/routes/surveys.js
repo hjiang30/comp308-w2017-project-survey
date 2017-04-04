@@ -18,7 +18,7 @@ router.get('/',(req,res,next)=>{
 
 
 // get -- the create page to create new survey
-route.get('/create',(req,res,next)=>{
+router.get('/create', usersController.RequireAuth,(req,res,next)=>{
     surveysController.DisplayAdd(req,res);
 }).post('/create',(req,res,next)=>
 {

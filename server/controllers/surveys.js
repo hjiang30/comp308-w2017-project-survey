@@ -21,9 +21,9 @@ module.exports.ReadSurveyList = (req,res)=>
         else
         {
             res.render('surveys/index',{
-                title:'Surveys',
+                title:'Surveys List',
                 surveys: surveys,
-                displayName:req.user.displayName
+                displayName:req.user ? req.user.displayName : ''
             })
         }
     });
@@ -31,9 +31,10 @@ module.exports.ReadSurveyList = (req,res)=>
 
 // Display create survey ejs page
 module.exports.DisplayAdd = (req,res) => {
-    res.render('surveys/details', {
+    res.render('surveys/create', {
     title: "Add a new Survey",
     surveys: '',
+    games:'',
     displayName: req.user.displayName
   });
 }
@@ -44,14 +45,14 @@ module.exports.CreateSurvey = (req, res) => {
 
     //create question objects
     let numberOfQuestion = req.body.numberOfQuestion;
-    let Question = questionSchema;
-    let Answer = answerSchema;
+    //let Question = questionSchema;
+    //let Answer = answerSchema;
     let questionArray = new Array();
 
     //create questions accorder to the numberOfQuestion
     for (var i = 0; i < numberOfQuestion; ++i)
     {
-        let question = new Question({
+        let question = new questionSchema({
             "questionTopic" : req.body.topic[i],
             "questionAns" : 
                 [

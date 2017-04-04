@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
-let answerSchema = new Schema ({ answer : String });
+let answerSchema = mongoose.Schema ({ answer : String });
 
 
 //Ready to go

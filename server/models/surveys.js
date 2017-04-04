@@ -11,7 +11,7 @@ let surveySchema = new Schema({
     questions : [
                     {
                         questionTopic : String,
-                        questionAns : [ {answer : String}],
+                        questionAns : [],
                         type : Number
                     }
                 ]
