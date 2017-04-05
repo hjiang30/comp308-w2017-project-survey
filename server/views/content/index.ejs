@@ -53,6 +53,7 @@
     </div><!-- /.carousel -->
 
     <!-- MAIN CONTENT -->
+
     <div class="body_container">
     <!-- CONTENT PAGE FOR HOME -->
      <!-- START THE FEATURETTES -->
@@ -61,10 +62,17 @@
 
       <div class="row featurette">
         <div class="col-md-7">
+        <% if(typeof displayName == 'string' && displayName) { %>
           <h2 class="featurette-heading">You don't have account? <span class="text-muted">Sign up today!</span></h2>
           <p class="lead">Have more functionalities to keep track of your clients and employees from survey and
           easily manage survey application with analysis systematic.
-          <a class="btn btn-lg btn-success" href="/users/login" role="button">Sign up today</a>
+          <a class="btn btn-lg btn-success" href="/users/register" role="button">Sign up today</a>
+          <%  } else { %>
+          <h2 class="featurette-heading">Create your sruvey. <span class="text-muted">Create survey today!</span></h2>
+          <p class="lead">Have more functionalities to keep track of your clients and employees from survey and
+          easily manage survey application with analysis systematic.
+          <a class="btn btn-lg btn-success" href="/surveys/initia" role="button">Create Survey</a>
+          <% } %>
           </p>
         </div>
         <div class="col-md-5">
@@ -79,7 +87,7 @@
           <h2 class="featurette-heading">Create, Respond, Analyze <span class="text-muted">Now!</span></h2>
           <p class="lead">Its Survey is online survey development cloud-based web application. In addition to providing ease of use, user can create a survey based on 
           provided templates such as multiple choices, agree or disagree or short answer after he or she is registered and logged in site.
-          <a class="btn btn-lg btn-info" href="#" role="button">Respond Survey</a>
+          <a class="btn btn-lg btn-info" href="/surveys" role="button">Respond Survey</a>
           </p>
         </div>
         <div class="col-md-5 col-md-pull-7">
