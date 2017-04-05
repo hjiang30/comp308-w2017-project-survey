@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/Scripts/lib/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/Scripts/lib/font-awesome/css/font-awesome.min.css">
     <link rel='stylesheet' href='/Content/app.css' />
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
   </head>
   <body>
 
@@ -34,25 +35,27 @@
         <% } %>
 
         <% if(typeof displayName == 'string' && displayName) { %>
-          <% if(title == "Games") { %>
+          <% if(title == "My surveys") { %>
           <li class="active"><a href="/games"><i class="fa fa-quora" aria-hidden="true"></i>
-          </i> Survey List</a></li>
+          </i> My Survey List</a></li>
           <% } else { %>
             <li><a href="/games"><i class="fa fa-quora" aria-hidden="true"></i>
-            </i> Survey List</a></li>
+            </i> My Survey List</a></li>
           <% } %>
         <% } %>
 
-        <% if(title == "Contact") { %>
-          <li class="active"><a href="/contact"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
-        <% } else { %>
-          <li><a href="/contact"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
-        <% } %>
+        <% if(typeof displayName == 'string' && displayName) { %>
+          <% if(title == "Create Survey") { %>
+            <li class="active"><a href="/surveys/initial"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+            <% } else { %>
+              <li><a href="/surveys/initial"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+            <% } %>
+        <% } %>         
 
         <% if(title == "Respond") { %>
-          <li class="active"><a href="/contact"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
+          <li class="active"><a href="/surveys"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
         <% } else { %>
-          <li><a href="/contact"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
+          <li><a href="/surveys"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
         <% } %>
 
         <% if(typeof displayName == 'string' && displayName) { %>
