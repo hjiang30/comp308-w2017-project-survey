@@ -15,6 +15,7 @@ body {
 
 .body_container {
   margin-top: 100px;
+  width:100%
 
 }
 
@@ -25,7 +26,7 @@ body {
 }
 
 .foot container{
-  background-color: darkgray;
+  background-color: white;
   font-size: 15px;
 }
 
@@ -74,4 +75,17 @@ body {
 }
 .active {
   border-bottom: 3px solid #b42f4a;
+}
+
+.login{
+margin-right: 35.333333%
+}
+
+.panel-default {
+opacity: 0.9;
+margin-top:30px;
+}
+.form-group.last { margin-bottom:0 }
+.alert-danger {
+  margin-left: 600px;
 }
