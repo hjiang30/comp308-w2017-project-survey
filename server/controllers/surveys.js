@@ -141,6 +141,42 @@ module.exports.CreateSurvey = (req, res) => {
     }
 }
 
+// display the survey page
+// find survey by survey id
+module.exports.DisplayResponse = (req, res) => {
+    let query = require('url').parse(req.url,true).query;
+    let topic = query.topic;
+    let numberOfQuestion = query.numberOfQuestion;
+    let type = query.type;
+
+    try {
+        // get a reference to the id from the url
+        let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+
+        // find one survey by its id
+        survey.findById(id, (err, surveys) => {
+            if (err) {
+                console.log(err);
+                res.end(error);
+            } else {
+                // show the survey page
+                res.render('surveys/response', {
+                    title: surveys.topic,
+                    user: surveys.user,
+                    surveys: surveys,
+                    displayName: req.user ? req.user.displayName : '',
+                    numberOfQuestion : parseInt(numberOfQuestion),
+                    topic: topic,
+                    type: type
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        res.redirect('/errors/404');
+    }
+}
+
 //Display the inital page for creating a survey
 module.exports.DisplayInitialPage = (req,res) =>
 {
