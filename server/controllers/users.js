@@ -24,7 +24,7 @@ module.exports.DisplayLogin = (req, res) => {
 // Processes the Login Request
 module.exports.ProcessLogin = () => {
   return passport.authenticate('local', {
-  successRedirect: '/games',
+  successRedirect: '/',
   failureRedirect: '/users/login',
   failureFlash: true
 })
@@ -72,7 +72,7 @@ module.exports.ProcessRegistration = (req, res) => {
       }
       // if registration is successful
       return passport.authenticate('local')(req, res, ()=>{
-        res.redirect('/games');
+        res.redirect('/');
       });
     });
 }

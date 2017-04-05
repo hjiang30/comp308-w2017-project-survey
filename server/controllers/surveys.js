@@ -32,13 +32,25 @@ module.exports.ReadSurveyList = (req,res)=>
 // Display create survey ejs page
 module.exports.DisplayAdd = (req,res) => {
     
+    let query = require('url').parse(req.url,true).query;
+    let topic = query.topic;
+    let numberOfQuestion = query.numberOfQuestion;
+    let type = query.type;
+    
+    /*
+    let topic = req.params.topic;
+    let numberOfQuestion = req.params.numberOfQuestion;
+    let type = req.params.type;*/
 
     res.render('surveys/create', {
-    title: "Add a new Survey",
+    title: "Create Survey",
     surveys: '',
     games:'',
     displayName: req.user.displayName,
-    userid :req.user._id
+    userid :req.user._id,
+    numberOfQuestion : parseInt(numberOfQuestion),
+    topic: topic,
+    type: type
   });
 }
 
@@ -85,9 +97,10 @@ module.exports.CreateSurvey = (req, res) => {
             "topic": req.body.topic,
             "user": req.user._id,
             "createDate" : new Date(),
-            "expireDate" : new Date(),//req.body.date,
+            "expireDate" : Date.parse(req.body.expireDate),//req.body.date,
             "questions" : questionArray,       
-            /*[
+            /* schema model template
+            [
                 { "questionTopic" : req.body.questionTopic1,
                   "questionAns" : 
                   [
@@ -126,4 +139,29 @@ module.exports.CreateSurvey = (req, res) => {
         console.log(err);
         res.redirect('/errors/404');
     }
+}
+
+//Display the inital page for creating a survey
+module.exports.DisplayInitialPage = (req,res) =>
+{
+    res.render('surveys/init', {
+    title: "Create Survey",
+    surveys: '',
+    games:'',
+    displayName: req.user.displayName,
+    userid :req.user._id
+  });
+}
+
+//Go to next step to input questions and answers
+module.exports.GotoCreatePage = (req,res)=>
+{
+    //
+    console.log(req.body.numberOfQuestion);
+    console.log(req.body.topic);
+
+    console.log(req.body.type);
+    let numberOfQuestion = parseInt(req.body.numberOfQuestion)
+    //redirect params to create page
+    res.redirect('/surveys/create/'+ '?topic=' + req.body.topic + '&type=' + req.body.type + '&numberOfQuestion=' + numberOfQuestion );
 }

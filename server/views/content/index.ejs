@@ -8,9 +8,9 @@
             <p class="lead">Its Survey is online survey development cloud-based web application. In addition to providing ease of use, user can create a survey based on provided templates such as multiple choices, agree or disagree or short answer after he or she is registered and logged in site. </p>
             <p>
               <% if(typeof displayName == 'string' && displayName) { %>
-                 <a class="btn btn-lg btn-success" href="/surveys/create" role="button">Create Survey</a>
+                 <a class="btn btn-lg btn-success" href="/surveys/initial" role="button">Create Survey</a>
               <%  } else { %>
-                 <a class="btn btn-lg btn-success" href="/users/login" role="button">Sign up today</a>
+                 <a class="btn btn-lg btn-success" href="/users/register" role="button">Sign up today</a>
               <% } %>
               <a class="btn btn-lg btn-info" href="/surveys" role="button">Respond Survey</a></div>
           </p>
