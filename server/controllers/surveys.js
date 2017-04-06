@@ -43,7 +43,6 @@ module.exports.DisplayAdd = (req, res) => {
     res.render('surveys/create', {
         title: "Create Survey",
         surveys: '',
-        games: '',
         displayName: req.user.displayName,
         userid: req.user._id,
         numberOfQuestion: parseInt(numberOfQuestion),
@@ -149,7 +148,7 @@ module.exports.CreateSurvey = (req, res) => {
                 console.log(err);
                 res.end(err);
             } else {
-                res.redirect('/surveys');
+                res.redirect('/surveys/mySurveys');
             }
         });
     }
@@ -226,6 +225,67 @@ module.exports.ResponseSurvey = (req, res) => {
         }
     });
 }
+
+// Display surveys list by user id
+module.exports.ReadUserSurvey = (req, res) => {
+    let userId = req.user._id;
+     //only show the surveys created by the user
+    survey.find({ user: userId }, (err, surveys) => {
+        if (err) {
+            return console.error(err);
+        }
+        else {
+            res.render('surveys/userSurvey', {
+                title: 'My Surveys List',
+                surveys: surveys,
+                displayName: req.user.displayName,
+            })
+        }
+    });
+}
+
+//display the survey detail page
+module.exports.ViewMySurvey =  (req, res) => {
+    try {
+       let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+        // find one survey by its id
+        survey.findById(id, (err, surveys) => {
+            if (err) {
+                console.log(err);
+                res.end(error);
+            } else {
+                // show the survey page
+                res.render('surveys/surveyDetail', {
+                    title: surveys.topic,
+                    user: surveys.user,
+                    type: surveys.questions[0].type,
+                    surveys: surveys,
+                    displayName: req.user.displayName
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        res.redirect('/errors/404');
+    }
+}
+
+// Delete the survey by the survey id
+module.exports.DeleteSurvey = (req, res) => {
+        // get a reference to the id from the url
+        let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+
+    survey.remove({_id: id}, (err) => {
+      if(err) {
+        console.log(err);
+        res.end(err);
+      } else {
+        // refresh the my survey list
+        res.redirect('/surveys/mySurveys');
+      }
+    });
+}
+
 
 //Display the inital page for creating a survey
 module.exports.DisplayInitialPage = (req, res) => {

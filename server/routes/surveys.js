@@ -23,6 +23,9 @@ router.get('/',(req,res,next)=>{
 });
 
 // get -- surveys list by user id
+router.get('/mySurveys',usersController.RequireAuth,(req,res,next)=>{
+   surveysController.ReadUserSurvey(req,res);
+});
 
 
 // get -- the create page to create new survey
@@ -46,6 +49,14 @@ router.post('/response/:id', (req, res, next) => {
     surveysController.ResponseSurvey(req, res);
 });
 
+// get -- display the survey detail page
+router.get('/view/:id',usersController.RequireAuth, (req, res, next) => {
+  surveysController.ViewMySurvey(req, res);
+});
+
 // get -- process the delete survey by survey id
+router.get('/delete/:id',usersController.RequireAuth, (req, res, next) => {
+  surveysController.DeleteSurvey(req, res);
+});
 
 module.exports = router;
