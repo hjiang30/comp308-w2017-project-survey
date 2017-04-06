@@ -80,7 +80,7 @@ module.exports.CreateSurvey = (req, res) => {
                      { "answer" : req.body['questionAns' + i + '2'] },
                      { "answer" : req.body['questionAns' + i + '3'] }
                 ],
-             "type" : 1
+             "type" : req.body.type
         }
         
         questionArray.push(question);
@@ -159,6 +159,7 @@ module.exports.DisplayResponse = (req, res) => {
                 res.render('surveys/response', {
                     title: surveys.topic,
                     user: surveys.user,
+                    type:surveys.questions[0].type,
                     surveys: surveys,
                     displayName: req.user ? req.user.displayName : '',
                 });
