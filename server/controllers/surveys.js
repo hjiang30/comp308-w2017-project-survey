@@ -141,6 +141,73 @@ module.exports.CreateSurvey = (req, res) => {
     }
 }
 
+// display the survey page
+// find survey by survey id
+module.exports.DisplayResponse = (req, res) => {
+
+    try {
+        // get a reference to the id from the url
+        let id = mongoose.Types.ObjectId.createFromHexString(req.params.id);
+
+        // find one survey by its id
+        survey.findById(id, (err, surveys) => {
+            if (err) {
+                console.log(err);
+                res.end(error);
+            } else {
+                // show the survey page
+                res.render('surveys/response', {
+                    title: surveys.topic,
+                    user: surveys.user,
+                    surveys: surveys,
+                    displayName: req.user ? req.user.displayName : '',
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        res.redirect('/errors/404');
+    }
+}
+
+// Process the response survey request
+module.exports.ResponseSurvey = (req, res) => {
+    let numberofQuestions = req.body.numberofQuestions;
+    console.log(numberofQuestions);
+    let questionArray = [];
+    for (var i = 0; i < numberofQuestions; ++i) {
+
+        let question = {
+            "questionTopic": req.body['questionTopic' + i],
+            "questionAns": req.body['question' + i]
+        }
+
+        questionArray.push(question);
+    }
+
+
+    let newResponse = answerSchema({
+        "surveyTopic": req.body.surveyTopic,
+        "user": req.body.userId,
+        "questions": questionArray,
+    });
+
+   
+    answerSchema.create(newResponse, (err, answer) => {
+        try {
+             if (err) {
+                console.log(err);
+                res.end(err);
+            } else {
+                res.redirect('/surveys');
+            }
+        } catch (err) {
+            console.log(err);
+            res.redirect('/errors/404');
+        }
+    });
+}
+
 //Display the inital page for creating a survey
 module.exports.DisplayInitialPage = (req,res) =>
 {

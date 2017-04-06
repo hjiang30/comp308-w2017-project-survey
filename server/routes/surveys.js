@@ -29,19 +29,22 @@ router.get('/',(req,res,next)=>{
 router.get('/create', usersController.RequireAuth,(req,res,next)=>{
     surveysController.DisplayAdd(req,res);
 });
-
+// post -- process to save the new survey to db
 router.post('/create',usersController.RequireAuth,(req,res,next)=>
 {
     console.log("try to save");
     surveysController.CreateSurvey(req,res);
 });
 
-// post -- process to save the new survey to db
-
 // get -- Display survey page by survey id
-
+router.get('/response/:id', (req, res, next) => {
+    surveysController.DisplayResponse(req, res);
+});
 
 // post -- save survey respond to Db
+router.post('/response/:id', (req, res, next) => {
+    surveysController.ResponseSurvey(req, res);
+});
 
 // get -- process the delete survey by survey id
 
