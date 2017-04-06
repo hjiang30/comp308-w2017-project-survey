@@ -144,10 +144,6 @@ module.exports.CreateSurvey = (req, res) => {
 // display the survey page
 // find survey by survey id
 module.exports.DisplayResponse = (req, res) => {
-    let query = require('url').parse(req.url,true).query;
-    let topic = query.topic;
-    let numberOfQuestion = query.numberOfQuestion;
-    let type = query.type;
 
     try {
         // get a reference to the id from the url
@@ -165,9 +161,6 @@ module.exports.DisplayResponse = (req, res) => {
                     user: surveys.user,
                     surveys: surveys,
                     displayName: req.user ? req.user.displayName : '',
-                    numberOfQuestion : parseInt(numberOfQuestion),
-                    topic: topic,
-                    type: type
                 });
             }
         });
@@ -175,6 +168,44 @@ module.exports.DisplayResponse = (req, res) => {
         console.log(err);
         res.redirect('/errors/404');
     }
+}
+
+// Process the response survey request
+module.exports.ResponseSurvey = (req, res) => {
+    let numberofQuestions = req.body.numberofQuestions;
+    console.log(numberofQuestions);
+    let questionArray = [];
+    for (var i = 0; i < numberofQuestions; ++i) {
+
+        let question = {
+            "questionTopic": req.body['questionTopic' + i],
+            "questionAns": req.body['question' + i]
+        }
+
+        questionArray.push(question);
+    }
+
+
+    let newResponse = answerSchema({
+        "surveyTopic": req.body.surveyTopic,
+        "user": req.body.userId,
+        "questions": questionArray,
+    });
+
+   
+    answerSchema.create(newResponse, (err, answer) => {
+        try {
+             if (err) {
+                console.log(err);
+                res.end(err);
+            } else {
+                res.redirect('/surveys');
+            }
+        } catch (err) {
+            console.log(err);
+            res.redirect('/errors/404');
+        }
+    });
 }
 
 //Display the inital page for creating a survey
