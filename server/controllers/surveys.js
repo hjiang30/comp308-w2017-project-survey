@@ -60,7 +60,8 @@ module.exports.CreateSurvey = (req, res) => {
 
 
         let currentDate = moment.tz(moment(),"America/Toronto"); 
-        let expireDate =  moment.tz(Date.parse(req.body.expireDate),"America/Toronto");
+        let expireDate =  moment(Date.parse(req.body.expireDate)).format();
+        console.log(expireDate);
         //create question objects
         let numberOfQuestion = req.body.numberOfQuestion;
         console.log(numberOfQuestion);
