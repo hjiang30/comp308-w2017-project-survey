@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <!-- CSS SECTION -->
+    <link rel="stylesheet" href="/Scripts/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Scripts/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/Scripts/lib/font-awesome/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/Content/app.css' />
+    <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+  </head>
+  <body>
+
+  <nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" style="padding-top:8px;" href="/"><img src="../../Content/imgs/logo_small.png" alt="logo"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <% if(title == "Home") { %>
+          <li class="active"><a href="/"><i class="fa fa-home fa-lg"></i> Home</a></li>
+        <% } else { %>
+          <li><a href="/"><i class="fa fa-home fa-lg"></i> Home</a></li>
+        <% } %>
+
+        <% if(typeof displayName == 'string' && displayName) { %>
+          <% if(title == "My surveys") { %>
+          <li class="active"><a href="/surveys/mySurveys"><i class="fa fa-quora" aria-hidden="true"></i>
+          </i> My Survey List</a></li>
+          <% } else { %>
+            <li><a href="/surveys/mySurveys"><i class="fa fa-quora" aria-hidden="true"></i>
+            </i> My Survey List</a></li>
+          <% } %>
+        <% } %>
+
+        <% if(typeof displayName == 'string' && displayName) { %>
+          <% if(title == "Create Survey") { %>
+            <li class="active"><a href="/surveys/initial"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+            <% } else { %>
+              <li><a href="/surveys/initial"><i class="fa fa-plus" aria-hidden="true"></i> Create</a></li>
+            <% } %>
+        <% } %>         
+
+        <% if(title == "Respond") { %>
+          <li class="active"><a href="/surveys"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
+        <% } else { %>
+          <li><a href="/surveys"><i class="fa fa-commenting" aria-hidden="true"></i> Respond</a></li>
+        <% } %>
+
+        <% if(typeof displayName == 'string' && displayName) { %>
+          <li class="navbar-text"><i class="fa fa-user"></i> Welcome, <%= displayName %></li>
+          <li><a href="/users/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+        <% } else { %>
+          <li><a href="/users/login"><i class="fa fa-sign-in"></i> Login</a></li>
+        <% } %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>

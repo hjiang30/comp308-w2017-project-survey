@@ -1,0 +1,45 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h3>Surveys Statistics </h3>
+          <br>
+          <table class="table table-bordered table-striped table-hover">
+            <tr>
+              <th class="text-center">Survey Topic</th>
+              <th class="text-center">Ans1</th>
+              <th class="text-center">count</th>
+              <th class="text-center">Ans2</th>
+              <th class="text-center">count</th>
+              <th class="text-center">Ans3</th>
+              <th class="text-center">count</th>
+              <th class="text-center">Total</th>
+              
+            </tr>
+            <!-- Template Row -->
+            <% for (let count = 0; count < Object.keys(result).length; count++) {  var keys = Object.keys(result); var quest = result[keys[count]];var keys_ = Object.keys(quest) ;%>
+            <tr>
+              <td class="text-center"><%= quest['topic'] %></td>
+              <td class="text-center"><%= keys_[1] %></td>
+              <td class="text-center"><%= quest[keys_[1]] %></td>
+              <td class="text-center"><%= keys_[2] %></td>
+              <td class="text-center"><%= quest[keys_[2]] %></td>
+              <td class="text-center"><%= keys_[3] %></td>
+              <td class="text-center"><%= quest[keys_[3]] %></td>
+              <td class="text-center"><%= quest[keys_[1]]+quest[keys_[2]]+quest[keys_[3]] %></td>
+            </tr>
+            
+            <% } %>
+          </table>
+          <td class="text-center">
+              <a href="/surveys/excel/<%= surveyID %>" class="btn btn-primary">
+              <i class="fa fa-eye"></i> export</a>
+          </td>
+        </div>
+      </div>
+    </div>
+
+
+<% include ../partials/footer.ejs %>

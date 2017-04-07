@@ -1,0 +1,32 @@
+{
+  "name": "comp308-w2017-lesson8b",
+  "description": "## Welcome to It's survey - A survey website developed by MEAN",
+  "main": "server.js",
+  "authors": [
+    "Angela Liu",
+    "Sisi Li",
+    "John Hao",
+    "Giho Kim",
+    "Ryan Huang"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "NodeJS",
+    "ExpressJS",
+    "EJS"
+  ],
+  "homepage": "https://github.com/RyanYizhaoHuang/comp308-w2017-project-survey",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/Scripts/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.4",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}
