@@ -31,7 +31,7 @@
           
             <% for (let count = 1; count <= numberOfQuestion; count++) { %>
               <div class="form-group">
-                <label for="NameTextField">Question Topic<%= count %></label>
+                <label for="NameTextField">Question Topic <%= count %></label>
                 <input type="text" class="form-control" id="NameTextField"
                 placeholder="Question" name="questionTopic<%=count%>" value="" required>
               </div>
@@ -49,7 +49,7 @@
               <div class="form-group">
                 <label for="CostTextField">Answer 3</label>
                 <input type="text" class="form-control" id="CostTextField"
-                placeholder="Answer Three" name="questionAns<%=count%>3" value="">
+                placeholder="Answer Three (Optional)" name="questionAns<%=count%>3" value="">
               </div>
               <% } %>
                <% } %>

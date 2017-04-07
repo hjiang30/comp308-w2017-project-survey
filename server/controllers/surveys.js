@@ -5,6 +5,9 @@ let survey = require('../models/surveys');
 let answerSchema = require('../models/answer');
 let questionSchema = require('../models/question');
 
+//convert to timezone
+let moment = require('moment-timezone');
+
 
 
 
@@ -55,6 +58,9 @@ module.exports.DisplayAdd = (req, res) => {
 module.exports.CreateSurvey = (req, res) => {
     try {
 
+
+        let currentDate = moment.tz(moment(),"America/Toronto"); 
+        let expireDate =  moment.tz(Date.parse(req.body.expireDate),"America/Toronto");
         //create question objects
         let numberOfQuestion = req.body.numberOfQuestion;
         console.log(numberOfQuestion);
@@ -114,8 +120,8 @@ module.exports.CreateSurvey = (req, res) => {
         let newSurvey = survey({
             "topic": req.body.topic,
             "user": req.user._id,
-            "createDate": new Date(),
-            "expireDate": Date.parse(req.body.expireDate),//req.body.date,
+            "createDate": currentDate,
+            "expireDate": expireDate,//req.body.date,
             "questions": questionArray,
             /* schema model template
             [
