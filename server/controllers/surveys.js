@@ -59,7 +59,7 @@ module.exports.CreateSurvey = (req, res) => {
     try {
 
 
-        let currentDate = moment().format().toString(); 
+        let currentDate = moment().utc().format().toString(); 
         console.log(currentDate);
         let expireDate =  moment.utc(Date.parse(req.body.expireDate)).format().toString();
         console.log(expireDate);
