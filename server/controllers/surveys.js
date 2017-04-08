@@ -16,7 +16,7 @@ module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();//moment().format();
     //console.log(expireDate.toString());
-    console.log(currentDate.setTime(currentDate.getTime()-(3*60*60*1000)).toString());
+    console.log(currentDate.setTime(currentDate.getTime()-(4*60*60*1000)).toString());
     console.log(currentDate);
     
     //only show the expireDate is after currentDate
