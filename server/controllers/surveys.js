@@ -14,10 +14,11 @@ let moment = require('moment-timezone');
 // read and display the survey list
 module.exports.ReadSurveyList = (req, res) => {
     //get today's date
-    let currentDate = new Date();//moment().format();
-    //console.log(expireDate.toString());
-    console.log(currentDate.setTime(currentDate.getTime()-(4*60*60*1000)).toString());
-    console.log(currentDate);
+    let currentDate = new Date();
+    if (process.env.localEvi == false){
+        currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
+    }
+    //console.log(currentDate);
     
     //only show the expireDate is after currentDate
     survey.find({ expireDate: { $gt: currentDate.toString() } }, (err, surveys) => {
