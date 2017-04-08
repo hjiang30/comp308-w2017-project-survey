@@ -15,7 +15,7 @@ let moment = require('moment-timezone');
 module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();
-    if (process.env.localEvi == false){
+    if (process.env.localEvi == "false"){
         currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
     }
     //console.log(currentDate);
