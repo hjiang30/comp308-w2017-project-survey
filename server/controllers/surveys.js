@@ -30,7 +30,7 @@ module.exports.ReadSurveyList = (req, res) => {
         }
         else {
             res.render('surveys/index', {
-                title: 'Surveys List',
+                title: process.env.localEvi,
                 surveys: surveys,
                 displayName: req.user ? req.user.displayName : ''
             })
