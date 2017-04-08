@@ -17,7 +17,7 @@ module.exports.ReadSurveyList = (req, res) => {
     let currentDate = new Date();
     let evi = process.env.localEvi;
     currentDate.setTime(currentDate.getTime()+(moment().utcOffset()*60*1000));
-    
+    let timezone = moment.tz.guess();
     if (evi != null || evi == "online"){
         currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
     }
@@ -30,7 +30,7 @@ module.exports.ReadSurveyList = (req, res) => {
         }
         else {
             res.render('surveys/index', {
-                title: moment.tz.guess(),//moment().tz("America/Toronto").format('Z'),
+                title: timezone,//moment().tz("America/Toronto").format('Z'),
                 surveys: surveys,
                 displayName: req.user ? req.user.displayName : ''
             })
