@@ -16,7 +16,7 @@ module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();
     let evi = process.env.localEvi;
-    currentDate.setTime(currentDate.getTime()-((moment().utcOffset())*60*1000));
+    currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
     
     if (evi != null || evi == "online"){
         currentDate.setTime(currentDate.getTime()-((moment().utcOffset())*60*1000));
