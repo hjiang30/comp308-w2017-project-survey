@@ -16,10 +16,10 @@ module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();
     let evi = process.env.localEvi;
-    currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
+    currentDate.setTime(currentDate.getTime()+(moment().utcOffset()*60*1000));
     
     if (evi != null || evi == "online"){
-        currentDate.setTime(currentDate.getTime()-((moment().utcOffset())*60*1000));
+        currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
     }
     console.log(moment().utcOffset());
     
@@ -30,7 +30,7 @@ module.exports.ReadSurveyList = (req, res) => {
         }
         else {
             res.render('surveys/index', {
-                title: process.env.localEvi,
+                title: moment().utcOffset(),
                 surveys: surveys,
                 displayName: req.user ? req.user.displayName : ''
             })
