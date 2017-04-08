@@ -16,10 +16,10 @@ module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();
     let evi = process.env.localEvi;
-    if (evi == "false" || evi == false){
+    if (evi != null || evi == "online"){
         currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
     }
-    //console.log(currentDate);
+    console.log(moment().utcOffset());
     
     //only show the expireDate is after currentDate
     survey.find({ expireDate: { $gt: currentDate.toString() } }, (err, surveys) => {
