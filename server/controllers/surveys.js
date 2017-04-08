@@ -30,7 +30,7 @@ module.exports.ReadSurveyList = (req, res) => {
         }
         else {
             res.render('surveys/index', {
-                title: moment().utcOffset(),
+                title: new Date().getTimezoneOffset(),
                 surveys: surveys,
                 displayName: req.user ? req.user.displayName : ''
             })
