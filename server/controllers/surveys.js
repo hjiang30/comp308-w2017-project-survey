@@ -16,7 +16,7 @@ module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();
     let evi = process.env.localEvi;
-    currentDate.setTime(currentDate.getTime()+(moment().utcOffset()*60*1000));
+    //currentDate.setTime(currentDate.getTime()+(moment().utcOffset()*60*1000));
     let timezone = moment.tz.guess();
     if (evi != null || evi == "online"){
         currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
@@ -68,15 +68,17 @@ module.exports.CreateSurvey = (req, res) => {
 
 
         let currentDate = moment().utc().format().toString(); 
+        //console.log(currentDate);
+        let timeOffset = req.body.timeOffset;
         console.log(currentDate);
-        let expireDate =  moment.utc(Date.parse(req.body.expireDate)).format().toString();
+        let expireDate =  moment.utc(Date.parse(req.body.expireDate)).add(timeOffset,'m').format().toString();
         console.log(expireDate);
         //create question objects
         let numberOfQuestion = req.body.numberOfQuestion;
-        console.log(numberOfQuestion);
-        console.log(req.body['questionAns11']);
-        console.log(req.body['questionAns' + 1 + '2']);
-        console.log(req.body['questionAns' + 1 + '3']);
+        //console.log(numberOfQuestion);
+        //console.log(req.body['questionAns11']);
+        //console.log(req.body['questionAns' + 1 + '2']);
+        //console.log(req.body['questionAns' + 1 + '3']);
         //let Question = questionSchema;
         //let Answer = answerSchema;
         let questionArray = [];
