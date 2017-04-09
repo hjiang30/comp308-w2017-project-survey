@@ -1,0 +1,63 @@
+<% include ../partials/header.ejs %>
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+          <h1><%= title %></h1>
+            <form class="form" method="post">
+            <!--hidden input to capture numberOfQuestion and question type-->
+            <input type="hidden" class="form-control" id="NameTextField"
+                placeholder="Survey Topic" name="numberOfQuestion" value="<%= numberOfQuestion %>" required>
+            <input type="hidden" class="form-control" id="NameTextField"
+                placeholder="Question Type" name="type" value="<%= type %>" required>
+
+              <div class="form-group">
+                <label for="NameTextField">Survey Topic</label>
+                <input type="text" class="form-control" id="NameTextField"
+                placeholder="Survey Topic" name="topic" value="<%= topic %>" required>
+              </div>
+
+              <div class="form-group">
+                <label for="NameTextField">Expire Date</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" name="expireDate" value="" required/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+     
+          
+            <% for (let count = 1; count <= numberOfQuestion; count++) { %>
+              <div class="form-group">
+                <label for="NameTextField">Question Topic <%= count %></label>
+                <input type="text" class="form-control" id="NameTextField"
+                placeholder="Question" name="questionTopic<%=count%>" value="" required>
+              </div>
+              <% if(type == 1 || type == 2) { %>
+               <div class="form-group">
+                <label for="CostTextField">Answer 1</label>
+                <input type="text" class="form-control" id="CostTextField"
+                placeholder="Answer One" name="questionAns<%=count%>1" value=""  required>
+              </div>
+              <div class="form-group">
+                <label for="CostTextField">Answer 2</label>
+                <input type="text" class="form-control" id="CostTextField"
+                placeholder="Answer Two" name="questionAns<%=count%>2" value=""  required>
+              </div>
+              <div class="form-group">
+                <label for="CostTextField">Answer 3</label>
+                <input type="text" class="form-control" id="CostTextField"
+                placeholder="Answer Three (Optional)" name="questionAns<%=count%>3" value="">
+              </div>
+              <% } %>
+               <% } %>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-check-square-o"></i> Submit</button>
+              <a href="/" class="btn btn-warning"><i class="fa fa-undo"></i> Cancel</a>
+            </form>
+        </div>
+      </div>
+    </div>
+
+<% include ../partials/footer.ejs %>
