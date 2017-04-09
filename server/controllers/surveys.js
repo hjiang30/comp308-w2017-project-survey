@@ -15,13 +15,6 @@ let moment = require('moment-timezone');
 module.exports.ReadSurveyList = (req, res) => {
     //get today's date
     let currentDate = new Date();
-    let evi = process.env.localEvi;
-    //currentDate.setTime(currentDate.getTime()+(moment().utcOffset()*60*1000));
-    let timezone = moment.tz.guess();
-    if (evi != null || evi == "online"){
-        currentDate.setTime(currentDate.getTime()+((moment().utcOffset())*60*1000));
-    }
-    console.log(moment().utcOffset());
     
     //only show the expireDate is after currentDate
     survey.find({ expireDate: { $gt: currentDate.toString() } }, (err, surveys) => {
@@ -30,7 +23,7 @@ module.exports.ReadSurveyList = (req, res) => {
         }
         else {
             res.render('surveys/index', {
-                title: timezone,//moment().tz("America/Toronto").format('Z'),
+                title: "Surveys List",
                 surveys: surveys,
                 displayName: req.user ? req.user.displayName : ''
             })
@@ -70,17 +63,21 @@ module.exports.CreateSurvey = (req, res) => {
         let currentDate = moment().utc().format().toString(); 
         //console.log(currentDate);
         let timeOffset = req.body.timeOffset;
-        console.log(currentDate);
-        let expireDate =  moment.utc(Date.parse(req.body.expireDate)).add(timeOffset,'m').format().toString();
+        //console.log("timeOffset:");
+        //console.log(timeOffset);
+        let evi = process.env.localEvi;
+        let expireDate;
+
+        if (evi != null || evi == "online"){
+            expireDate =  moment.utc(Date.parse(req.body.expireDate)).subtract(timeOffset,'m').format().toString();          
+        }
+        else
+        {
+            expireDate =  moment.utc(Date.parse(req.body.expireDate)).format().toString(); 
+        }
         console.log(expireDate);
         //create question objects
         let numberOfQuestion = req.body.numberOfQuestion;
-        //console.log(numberOfQuestion);
-        //console.log(req.body['questionAns11']);
-        //console.log(req.body['questionAns' + 1 + '2']);
-        //console.log(req.body['questionAns' + 1 + '3']);
-        //let Question = questionSchema;
-        //let Answer = answerSchema;
         let questionArray = [];
         let type = req.body.type;
         //create questions accorder to the numberOfQuestion
